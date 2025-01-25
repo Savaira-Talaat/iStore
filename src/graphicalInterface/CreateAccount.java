@@ -17,15 +17,10 @@ public class CreateAccount extends JFrame {
         JPanel centralPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gridBCCentralPanel = new GridBagConstraints();
 
-        JLabel vide = new JLabel("");
-        gridBCCentralPanel.gridx = 0;
-        gridBCCentralPanel.gridy = 0;
-        centralPanel.add(vide);
-
         JLabel createAccount = new JLabel("Create an account");
         gridBCCentralPanel.gridx = 1;
         gridBCCentralPanel.gridy = 0;
-        centralPanel.add(createAccount);
+        centralPanel.add(createAccount, gridBCCentralPanel);
 
         JLabel email = new JLabel("Email : ");
         JTextField emailField = new JTextField(20);

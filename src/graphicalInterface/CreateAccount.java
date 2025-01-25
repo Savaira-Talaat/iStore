@@ -1,5 +1,9 @@
 package graphicalInterface;
 
+import com.supinfo.database.Signin;
+import com.supinfo.model.Role;
+import com.supinfo.model.User;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -43,10 +47,6 @@ public class CreateAccount extends JFrame {
         gridBCCentralPanel.gridy = 2;
         centralPanel.add(passwordField, gridBCCentralPanel);
 
-        JCheckBox passwordView = new JCheckBox("View Password");
-        gridBCCentralPanel.gridx = 2;
-        gridBCCentralPanel.gridy = 2;
-        centralPanel.add(passwordView, gridBCCentralPanel);
 
         gridBCCentralPanel.gridx = 1;
         gridBCCentralPanel.gridy = 3;
@@ -60,7 +60,16 @@ public class CreateAccount extends JFrame {
             passwordField.setEchoChar((passwordView.isSelected() ? (char) 0 : '*'));
         });
 
-        createAccountButton.addActionListener(e -> {});
+        createAccountButton.addActionListener(e -> {
+            Signin.signIn(
+                    new User(
+                            usernameField.getText(),
+                            passwordField.getText(),
+                            emailField.getText(),
+                            Role.EMPLOYEE
+                    )
+            );
+        });
 
         loginButton.addActionListener(e -> {
             new Login();

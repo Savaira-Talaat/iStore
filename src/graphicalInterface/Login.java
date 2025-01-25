@@ -61,7 +61,12 @@ public class Login extends JFrame {
             passwordField.setEchoChar((passwordView.isSelected() ? (char) 0 : '*'));
         });
 
-        loginButton.addActionListener(e -> {});
+        loginButton.addActionListener(e -> {
+            boolean authenticate = com.supinfo.database.Login.authenticate(
+                    loginField.getText(),
+                    passwordField.getText()
+            );
+        });
 
         createAccountButton.addActionListener(e -> {
             new CreateAccount();

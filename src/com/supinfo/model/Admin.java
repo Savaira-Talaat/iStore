@@ -1,8 +1,8 @@
 package com.supinfo.model;
 
 public class Admin extends User {
-    public Admin(int employeeId, String username, String password, String email, Role role) {
-        super(employeeId, username, password, email, role);
+    public Admin(String username, String password, String email, Role role) {
+        super(username, password, email, role);
     }
 
     private void whitelist(String email) {
@@ -14,7 +14,7 @@ public class Admin extends User {
     private void deleteStore(int storeId) {
 
     }
-    private void assignEmployeeToStore(int employeeId, int storeId){
+    private void assignEmployeeToStore(int storeId){
 
     }
 }

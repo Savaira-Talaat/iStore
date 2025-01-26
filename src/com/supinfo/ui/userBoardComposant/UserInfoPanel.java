@@ -1,6 +1,6 @@
-package userBoardComposant;
+package com.supinfo.ui.userBoardComposant;
 
-import tableBoardUser.UserEmployeeTable;
+import com.supinfo.ui.tableBoardUser.UserEmployeeTable;
 
 import javax.swing.*;
 import java.awt.*;

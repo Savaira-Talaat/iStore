@@ -1,8 +1,9 @@
-package graphicalInterface;
+package com.supinfo.ui.graphicalInterface;
 
-import adminBoardComposant.EmployeeManagementPanel;
-import adminBoardComposant.InventoryManagementPanel;
-import adminBoardComposant.StoreManagementPanel;
+
+import com.supinfo.ui.adminBoardComposant.EmployeeManagementPanel;
+import com.supinfo.ui.adminBoardComposant.InventoryManagementPanel;
+import com.supinfo.ui.adminBoardComposant.StoreManagementPanel;
 
 import javax.swing.*;
 

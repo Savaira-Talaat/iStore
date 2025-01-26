@@ -1,17 +1,20 @@
-package tableBoardAdmin;
+package com.supinfo.ui.tableBoardAdmin;
+
+import connexionPackage.ConnexionDatabase;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
 
-public class InventoryTable extends JPanel {
+public class StoreTable extends JPanel {
     private DefaultTableModel tableModel;
     //Manque la class qui s'occupe de l'appel à la bse de donnée et récupère les données
     private JTable table;
     private int id;
 
-    public InventoryTable(){
+    public StoreTable(){
         //appel de la classe qui récupére la data
         //
 
@@ -34,15 +37,17 @@ public class InventoryTable extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
 
         //Table colonne
-        tableModel.addColumn("Item ID");
+        tableModel.addColumn("Store ID");
         tableModel.addColumn("Name");
-        tableModel.addColumn("Price");
-        tableModel.addColumn("Quantity");
+        tableModel.addColumn("User Id");
+        tableModel.addColumn("Username");
 
-        tableModel.addRow(new Object[]{"1", "Ketchup", "34", "4000"});
-        tableModel.addRow(new Object[]{"1", "salade", "35", "23"});
-        tableModel.addRow(new Object[]{"1", "pomme", "56", "45"});
+        tableModel.addRow(new Object[]{"1", "Pickante", "", ""});
+        tableModel.addRow(new Object[]{"1", "PLume Libre", "2", "Savaira"});
+        tableModel.addRow(new Object[]{"1", "Plier", "4", "Ours"});
 
         add(scrollPane);
+
     }
+
 }

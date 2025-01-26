@@ -1,4 +1,4 @@
-package tableBoardUser;
+package com.supinfo.ui.tableBoardUser;
 
 import connexionPackage.ConnexionDatabase;
 

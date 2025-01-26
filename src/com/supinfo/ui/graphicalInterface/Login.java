@@ -1,9 +1,9 @@
-package graphicalInterface;
+package com.supinfo.ui.graphicalInterface;
+
+import com.supinfo.model.Role;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Login extends JFrame {
 
@@ -62,10 +62,22 @@ public class Login extends JFrame {
         });
 
         loginButton.addActionListener(e -> {
-            boolean authenticate = com.supinfo.database.Login.authenticate(
+            Role authenticate = com.supinfo.database.Login.authenticate(
                     loginField.getText(),
                     passwordField.getText()
             );
+            if(authenticate!= null) {
+                if (authenticate.equals(Role.EMPLOYEE)) {
+                    new UserBoard();
+                } else if (authenticate.equals(Role.ADMIN)) {
+                    new AdminBoard();
+                }
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Authentication failed, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+                System.out.println(authenticate);
+
         });
 
         createAccountButton.addActionListener(e -> {

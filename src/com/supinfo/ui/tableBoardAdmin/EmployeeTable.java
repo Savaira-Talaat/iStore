@@ -1,4 +1,4 @@
-package tableBoardAdmin;
+package com.supinfo.ui.tableBoardAdmin;
 
 import connexionPackage.ConnexionDatabase;
 

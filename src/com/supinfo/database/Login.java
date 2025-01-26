@@ -1,12 +1,15 @@
 package com.supinfo.database;
 
+import com.supinfo.model.Role;
+import com.supinfo.ui.graphicalInterface.AdminBoard;
+import com.supinfo.ui.graphicalInterface.UserBoard;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
 public class Login {
-    public static boolean authenticate(String username, String password) {
-        String query = "Select username, password from users where username = ?";
+    public static Role authenticate(String username, String password) {
+        String query = "Select username, password, role from users where username = ?";
         try {
             Connection connection = ConnexionDatabase.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -14,12 +17,19 @@ public class Login {
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 String hashedPwd = resultSet.getString("password");
-                return BCrypt.checkpw(password, hashedPwd);
+                BCrypt.checkpw(password, hashedPwd);
+                Role role = Role.valueOf(resultSet.getString("role"));
+                if (role.equals(Role.EMPLOYEE)) {
+                    return Role.EMPLOYEE;
+                }
+                else {
+                    return Role.ADMIN;
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
 }

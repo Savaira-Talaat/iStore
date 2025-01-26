@@ -1,22 +1,22 @@
-package adminBoardComposant;
+package com.supinfo.ui.userBoardComposant;
 
-import tableBoardAdmin.EmployeeTable;
+
+
+import com.supinfo.ui.tableBoardUser.UserInventoryTable;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EmployeeManagementPanel extends JPanel {
+public class InventoryManagPanel extends JPanel {
 
-    private JButton creatButton = new JButton("Create");
     private JButton updateButton = new JButton("Update");
-    private JButton deleteButton = new JButton("Delete");
-    private EmployeeTable employeeTable;
 
-    private JTextField employeeEmailField = new JTextField(15);
-    private JTextField employeeRoleField = new JTextField(15);
+    private UserInventoryTable userInventoryTable;
 
-    public EmployeeManagementPanel(){
+    private JTextField quantityField = new JTextField(15);
 
+
+    public InventoryManagPanel(){
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel bottomPanel = new JPanel(new GridBagLayout());
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -26,15 +26,9 @@ public class EmployeeManagementPanel extends JPanel {
 
         //Bottom panel with the button
         GridBagConstraints gridBCBottom = new GridBagConstraints();
-        gridBCBottom.insets = new Insets(5,5,25,5);
+        gridBCBottom.insets = new Insets(5, 5, 25, 5);
         gridBCBottom.gridx = 1;
-        bottomPanel.add(creatButton, gridBCBottom);
-
-        gridBCBottom.gridx = 2;
         bottomPanel.add(updateButton, gridBCBottom);
-
-        gridBCBottom.gridx = 3;
-        bottomPanel.add(deleteButton, gridBCBottom);
 
         //Child panel from the Top Panel
         JPanel leftPanel = new JPanel(new GridBagLayout());
@@ -46,39 +40,24 @@ public class EmployeeManagementPanel extends JPanel {
         GridBagConstraints leftConstraintsPanel = new GridBagConstraints();
         leftConstraintsPanel.insets = new Insets(5, 5, 5, 5);
 
-        JLabel email = new JLabel("Email");
+        JLabel quantity = new JLabel("Quantity");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(email, leftConstraintsPanel);
+        leftPanel.add(quantity, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(employeeEmailField, leftConstraintsPanel);
+        leftPanel.add(quantityField, leftConstraintsPanel);
 
-        JLabel role = new JLabel("Role");
-        leftConstraintsPanel.gridx = 0;
-        leftConstraintsPanel.gridy = 3;
-        leftPanel.add(role, leftConstraintsPanel);
-        leftConstraintsPanel.gridx = 1;
-        leftConstraintsPanel.gridy = 3;
-        leftPanel.add(employeeRoleField, leftConstraintsPanel);
 
         //Table Right Panel
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();
         rightConstraintsPanel.insets = new Insets(5, 5, 5, 5);
         rightConstraintsPanel.gridx = 0;
         rightConstraintsPanel.gridy = 0;
-        employeeTable = new EmployeeTable();
-        rightPanel.add(employeeTable, rightConstraintsPanel);
-
-        creatButton.addActionListener(e -> {
-
-        });
+        userInventoryTable = new UserInventoryTable();
+        rightPanel.add(userInventoryTable, rightConstraintsPanel);
 
         updateButton.addActionListener(e -> {
-        });
-
-
-        deleteButton.addActionListener(e -> {
         });
 
         setLayout(new BorderLayout());

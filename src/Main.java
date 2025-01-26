@@ -1,4 +1,4 @@
-import graphicalInterface.Login;
+import com.supinfo.ui.graphicalInterface.Login;
 
 public class Main {
     public static void main(String[] args) {

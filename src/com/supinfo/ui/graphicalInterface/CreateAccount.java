@@ -1,8 +1,9 @@
-package graphicalInterface;
+package com.supinfo.ui.graphicalInterface;
 
 import com.supinfo.database.Signin;
 import com.supinfo.model.Role;
 import com.supinfo.model.User;
+import com.supinfo.ui.graphicalInterface.Login;
 
 import javax.swing.*;
 import java.awt.*;
@@ -69,6 +70,8 @@ public class CreateAccount extends JFrame {
                             Role.EMPLOYEE
                     )
             );
+            new Login();
+            this.dispose();
         });
 
         loginButton.addActionListener(e -> {

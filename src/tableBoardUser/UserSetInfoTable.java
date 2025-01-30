@@ -40,27 +40,25 @@ public class UserSetInfoTable extends JPanel {
         tableModel.addColumn("Username");
         tableModel.addColumn("Role");
 
-        tableModel.addRow(new Object[]{"titi@gmail.com", "Titi", "EMPLOYEE"});
-        tableModel.addRow(new Object[]{"Savaira@Kahoot.fr", "Savaira", "EMPLOYEE"});
-        tableModel.addRow(new Object[]{"Papi@quartsiecle.com", "Mathias", "EMPLOYEE"});
-        tableModel.addRow(new Object[]{"helloworld@gmail.com", "World", "EMPLOYEE"});
-
         add(scrollPane);
 
-        userData();
+        //Ici changez par le getuserId
+        userData(8);
     }
 
     public int getSelectedRow(){
         return table.getSelectedRow();
     }
 
-    private void userData(){
-        String query = "Select email, username, role from users";
+    private void userData(int userId){
+        String query = "Select email, username, role from users WHERE userId = ?";
 
         try {
             Connection connection = ConnexionDatabase.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            ResultSet resultSet = preparedStatement.executeQuery(query);
+            preparedStatement.setInt(1, userId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             tableModel.setRowCount(0);
 
@@ -71,8 +69,7 @@ public class UserSetInfoTable extends JPanel {
 
                 tableModel.addRow(new Object[]{email, username, role});
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }

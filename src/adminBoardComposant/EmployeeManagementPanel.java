@@ -7,6 +7,7 @@ import java.awt.*;
 
 public class EmployeeManagementPanel extends JPanel {
 
+    private JButton creatButton = new JButton("Create");
     private JButton updateButton = new JButton("Update");
     private JButton deleteButton = new JButton("Delete");
     private EmployeeTable employeeTable;
@@ -27,9 +28,12 @@ public class EmployeeManagementPanel extends JPanel {
         GridBagConstraints gridBCBottom = new GridBagConstraints();
         gridBCBottom.insets = new Insets(5,5,25,5);
         gridBCBottom.gridx = 1;
-        bottomPanel.add(updateButton, gridBCBottom);
+        bottomPanel.add(creatButton, gridBCBottom);
 
         gridBCBottom.gridx = 2;
+        bottomPanel.add(updateButton, gridBCBottom);
+
+        gridBCBottom.gridx = 3;
         bottomPanel.add(deleteButton, gridBCBottom);
 
         //Child panel from the Top Panel
@@ -65,6 +69,10 @@ public class EmployeeManagementPanel extends JPanel {
         rightConstraintsPanel.gridy = 0;
         employeeTable = new EmployeeTable();
         rightPanel.add(employeeTable, rightConstraintsPanel);
+
+        creatButton.addActionListener(e -> {
+
+        });
 
         updateButton.addActionListener(e -> {
         });

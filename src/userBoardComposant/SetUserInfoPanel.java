@@ -1,6 +1,5 @@
 package userBoardComposant;
 
-import tableBoardUser.UserInventoryTable;
 import tableBoardUser.UserSetInfoTable;
 
 import javax.swing.*;

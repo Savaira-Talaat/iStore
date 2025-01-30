@@ -1,19 +1,22 @@
 package tableBoardUser;
 
+import connexionPackage.ConnexionDatabase;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserInventoryTable extends JPanel {
     private DefaultTableModel tableModel;
-    //Manque la class qui s'occupe de l'appel à la bse de donnée et récupère les données
     private JTable table;
     private int id;
 
     public UserInventoryTable(){
-        //appel de la classe qui récupére la data
-        //
 
         //Table Modèle
         tableModel = new DefaultTableModel();
@@ -26,7 +29,6 @@ public class UserInventoryTable extends JPanel {
                 int row = table.getSelectedRow();
                 if (row != -1) {
                     id = (int) table.getValueAt(row, 0);
-                    //System.out.println("Selected Customer ID: " + id);
                 }
             }
         });
@@ -34,12 +36,38 @@ public class UserInventoryTable extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
 
         //Table colon
-        tableModel.addColumn("Item ID");
-        tableModel.addColumn("Name");
+        tableModel.addColumn("Store Name");
+        tableModel.addColumn("Item Id");
+        tableModel.addColumn("Item Name");
         tableModel.addColumn("Price");
         tableModel.addColumn("Quantity");
-        tableModel.addColumn("Inventory ID");
+
+        tableModel.addRow(new Object[]{"Auchan", "1", "Bouteille", "23", "300"});
+        tableModel.addRow(new Object[]{"Mono", "2", "Ketchup", "2", "30"});
+        tableModel.addRow(new Object[]{"Carrefour", "3", "Salade", "0.45", "12"});
+        tableModel.addRow(new Object[]{"Mont", "4", "Burger", "345", "45"});
+
 
         add(scrollPane);
+
     }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

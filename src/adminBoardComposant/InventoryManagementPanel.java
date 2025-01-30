@@ -13,10 +13,9 @@ public class InventoryManagementPanel extends JPanel {
     private JButton deleteButton = new JButton("Delete");
     private InventoryTable inventoryTable;
 
-    private JTextField employeeEmailField = new JTextField(15);
-    private JTextField employeePseudoField = new JTextField(15);
-    private JTextField employeePasswordField = new JTextField(15);
-    private JTextField employeeRoleField = new JTextField(15);
+    private JTextField nameField = new JTextField(15);
+    private JTextField priceField = new JTextField(15);
+    private JTextField quantityField = new JTextField(15);
 
     public InventoryManagementPanel() {
 
@@ -50,37 +49,30 @@ public class InventoryManagementPanel extends JPanel {
         GridBagConstraints leftConstraintsPanel = new GridBagConstraints();
         leftConstraintsPanel.insets = new Insets(5, 5, 5, 5);
 
-        JLabel email = new JLabel("Email");
+        JLabel name = new JLabel("Name");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(email, leftConstraintsPanel);
+        leftPanel.add(name, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(employeeEmailField, leftConstraintsPanel);
+        leftPanel.add(nameField, leftConstraintsPanel);
 
-        JLabel pseudo = new JLabel("Pseudo");
+        JLabel price = new JLabel("Price");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 1;
-        leftPanel.add(pseudo, leftConstraintsPanel);
+        leftPanel.add(price, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 1;
-        leftPanel.add(employeePseudoField, leftConstraintsPanel);
+        leftPanel.add(priceField, leftConstraintsPanel);
 
-        JLabel password = new JLabel("Password");
+        JLabel quantity = new JLabel("Quantity");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 2;
-        leftPanel.add(password, leftConstraintsPanel);
+        leftPanel.add(quantity, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 2;
-        leftPanel.add(employeePasswordField, leftConstraintsPanel);
+        leftPanel.add(quantityField, leftConstraintsPanel);
 
-        JLabel role = new JLabel("Role");
-        leftConstraintsPanel.gridx = 0;
-        leftConstraintsPanel.gridy = 3;
-        leftPanel.add(role, leftConstraintsPanel);
-        leftConstraintsPanel.gridx = 1;
-        leftConstraintsPanel.gridy = 3;
-        leftPanel.add(employeeRoleField, leftConstraintsPanel);
 
         //Table Right Panel
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();

@@ -1,9 +1,12 @@
 package tableBoardAdmin;
 
+import connexionPackage.ConnexionDatabase;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.*;
 
 public class StoreTable extends JPanel {
     private DefaultTableModel tableModel;
@@ -36,7 +39,15 @@ public class StoreTable extends JPanel {
         //Table colonne
         tableModel.addColumn("Store ID");
         tableModel.addColumn("Name");
+        tableModel.addColumn("User Id");
+        tableModel.addColumn("Username");
+
+        tableModel.addRow(new Object[]{"1", "Pickante", "", ""});
+        tableModel.addRow(new Object[]{"1", "PLume Libre", "2", "Savaira"});
+        tableModel.addRow(new Object[]{"1", "Plier", "4", "Ours"});
 
         add(scrollPane);
+
     }
+
 }

@@ -3,6 +3,7 @@ package graphicalInterface;
 
 import userBoardComposant.UserInfoPanel;
 import userBoardComposant.InventoryManagPanel;
+import userBoardComposant.SetUserInfoPanel;
 
 import javax.swing.*;
 
@@ -17,6 +18,7 @@ public class UserBoard extends JFrame {
         JTabbedPane userPane = new JTabbedPane();
 
         userPane.addTab("User Info", new UserInfoPanel());
+        userPane.addTab("Set User Info", new SetUserInfoPanel());
         userPane.addTab("Inventory", new InventoryManagPanel());
 
 

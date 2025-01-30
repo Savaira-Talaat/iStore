@@ -39,6 +39,10 @@ public class InventoryTable extends JPanel {
         tableModel.addColumn("Price");
         tableModel.addColumn("Quantity");
 
+        tableModel.addRow(new Object[]{"1", "Ketchup", "34", "4000"});
+        tableModel.addRow(new Object[]{"1", "salade", "35", "23"});
+        tableModel.addRow(new Object[]{"1", "pomme", "56", "45"});
+
         add(scrollPane);
     }
 }

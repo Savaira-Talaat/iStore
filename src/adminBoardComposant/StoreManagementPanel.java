@@ -1,6 +1,5 @@
 package adminBoardComposant;
 
-import tableBoardAdmin.InventoryTable;
 import tableBoardAdmin.StoreTable;
 
 import javax.swing.*;
@@ -8,15 +7,13 @@ import java.awt.*;
 
 public class StoreManagementPanel extends JPanel {
 
-    private JButton saveButton = new JButton("Save");
-    private JButton updateButton = new JButton("Update");
+    private JButton createButton = new JButton("Create");
+    private JButton assignedButton = new JButton("Assigned");
     private JButton deleteButton = new JButton("Delete");
     private StoreTable storeTable;
 
-    private JTextField employeeEmailField = new JTextField(15);
-    private JTextField employeePseudoField = new JTextField(15);
-    private JTextField employeePasswordField = new JTextField(15);
-    private JTextField employeeRoleField = new JTextField(15);
+    private JTextField storeNameField = new JTextField(15);
+    private JTextField assignedEmployeeField = new JTextField(15);
 
     public StoreManagementPanel() {
 
@@ -32,10 +29,10 @@ public class StoreManagementPanel extends JPanel {
         gridBCBottom.insets = new Insets(5, 5, 25, 5);
         gridBCBottom.gridx = 0;
         gridBCBottom.gridy = 0;
-        bottomPanel.add(saveButton, gridBCBottom);
+        bottomPanel.add(createButton, gridBCBottom);
 
         gridBCBottom.gridx = 1;
-        bottomPanel.add(updateButton, gridBCBottom);
+        bottomPanel.add(assignedButton, gridBCBottom);
 
         gridBCBottom.gridx = 2;
         bottomPanel.add(deleteButton, gridBCBottom);
@@ -50,37 +47,21 @@ public class StoreManagementPanel extends JPanel {
         GridBagConstraints leftConstraintsPanel = new GridBagConstraints();
         leftConstraintsPanel.insets = new Insets(5, 5, 5, 5);
 
-        JLabel email = new JLabel("Email");
+        JLabel storeName = new JLabel("Store Name");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(email, leftConstraintsPanel);
+        leftPanel.add(storeName, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(employeeEmailField, leftConstraintsPanel);
+        leftPanel.add(storeNameField, leftConstraintsPanel);
 
-        JLabel pseudo = new JLabel("Pseudo");
+        JLabel assignedEmployee = new JLabel("Assigned");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 1;
-        leftPanel.add(pseudo, leftConstraintsPanel);
+        leftPanel.add(assignedEmployee, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 1;
-        leftPanel.add(employeePseudoField, leftConstraintsPanel);
-
-        JLabel password = new JLabel("Password");
-        leftConstraintsPanel.gridx = 0;
-        leftConstraintsPanel.gridy = 2;
-        leftPanel.add(password, leftConstraintsPanel);
-        leftConstraintsPanel.gridx = 1;
-        leftConstraintsPanel.gridy = 2;
-        leftPanel.add(employeePasswordField, leftConstraintsPanel);
-
-        JLabel role = new JLabel("Role");
-        leftConstraintsPanel.gridx = 0;
-        leftConstraintsPanel.gridy = 3;
-        leftPanel.add(role, leftConstraintsPanel);
-        leftConstraintsPanel.gridx = 1;
-        leftConstraintsPanel.gridy = 3;
-        leftPanel.add(employeeRoleField, leftConstraintsPanel);
+        leftPanel.add(assignedEmployeeField, leftConstraintsPanel);
 
         //Table Right Panel
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();
@@ -90,8 +71,9 @@ public class StoreManagementPanel extends JPanel {
         storeTable = new StoreTable();
         rightPanel.add(storeTable, rightConstraintsPanel);
 
-        saveButton.addActionListener(e -> {});
-        updateButton.addActionListener(e -> {});
+        createButton.addActionListener(e -> {
+        });
+        assignedButton.addActionListener(e -> {});
         deleteButton.addActionListener(e -> {});
 
         setLayout(new BorderLayout());

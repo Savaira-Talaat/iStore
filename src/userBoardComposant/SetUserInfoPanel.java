@@ -1,21 +1,21 @@
-package adminBoardComposant;
+package userBoardComposant;
 
-import tableBoardAdmin.EmployeeTable;
+import tableBoardUser.UserInventoryTable;
+import tableBoardUser.UserSetInfoTable;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EmployeeManagementPanel extends JPanel {
+public class SetUserInfoPanel extends JPanel {
 
     private JButton updateButton = new JButton("Update");
     private JButton deleteButton = new JButton("Delete");
-    private EmployeeTable employeeTable;
 
-    private JTextField employeeEmailField = new JTextField(15);
-    private JTextField employeeRoleField = new JTextField(15);
+    private UserSetInfoTable userSetInfoTable;
 
-    public EmployeeManagementPanel(){
+    private JTextField usernameField = new JTextField(15);
 
+    public SetUserInfoPanel(){
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel bottomPanel = new JPanel(new GridBagLayout());
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -25,7 +25,8 @@ public class EmployeeManagementPanel extends JPanel {
 
         //Bottom panel with the button
         GridBagConstraints gridBCBottom = new GridBagConstraints();
-        gridBCBottom.insets = new Insets(5,5,25,5);
+        gridBCBottom.insets = new Insets(5, 5, 25, 5);
+
         gridBCBottom.gridx = 1;
         bottomPanel.add(updateButton, gridBCBottom);
 
@@ -42,38 +43,51 @@ public class EmployeeManagementPanel extends JPanel {
         GridBagConstraints leftConstraintsPanel = new GridBagConstraints();
         leftConstraintsPanel.insets = new Insets(5, 5, 5, 5);
 
-        JLabel email = new JLabel("Email");
+        JLabel Username = new JLabel("Username");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(email, leftConstraintsPanel);
+        leftPanel.add(Username, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(employeeEmailField, leftConstraintsPanel);
-
-        JLabel role = new JLabel("Role");
-        leftConstraintsPanel.gridx = 0;
-        leftConstraintsPanel.gridy = 3;
-        leftPanel.add(role, leftConstraintsPanel);
-        leftConstraintsPanel.gridx = 1;
-        leftConstraintsPanel.gridy = 3;
-        leftPanel.add(employeeRoleField, leftConstraintsPanel);
+        leftPanel.add(usernameField, leftConstraintsPanel);
 
         //Table Right Panel
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();
         rightConstraintsPanel.insets = new Insets(5, 5, 5, 5);
         rightConstraintsPanel.gridx = 0;
         rightConstraintsPanel.gridy = 0;
-        employeeTable = new EmployeeTable();
-        rightPanel.add(employeeTable, rightConstraintsPanel);
+        userSetInfoTable = new UserSetInfoTable();
+        rightPanel.add(userSetInfoTable, rightConstraintsPanel);
 
         updateButton.addActionListener(e -> {
+            int selectedRow = userSetInfoTable.getSelectedRow();
+            if (selectedRow != -1) {
+                String newUsername = usernameField.getText();
+                if (!newUsername.isEmpty()) {
+                    userSetInfoTable.updateUsername(selectedRow, newUsername);
+                    usernameField.setText("");
+                }
+            }
         });
 
-
         deleteButton.addActionListener(e -> {
+            int selectedRow = userSetInfoTable.getSelectedRow();
+            if (selectedRow != -1) {
+                int confirmation = JOptionPane.showConfirmDialog(
+                        this,
+                        "Are you sure you want to delete the user ?",
+                        "Confirmation",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    userSetInfoTable.deleteUser(selectedRow);
+                }
+            }
         });
 
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
     }
+
 }

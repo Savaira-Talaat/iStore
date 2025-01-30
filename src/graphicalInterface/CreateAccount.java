@@ -2,6 +2,8 @@ package graphicalInterface;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CreateAccount extends JFrame {
 
@@ -32,7 +34,8 @@ public class CreateAccount extends JFrame {
         centralPanel.add(emailField, gridBCCentralPanel);
 
         JLabel password = new JLabel("Password : ");
-        JTextField passwordField = new JTextField(20);
+        JPasswordField passwordField = new JPasswordField(20);
+        passwordField.setEchoChar('*');
         gridBCCentralPanel.gridx = 0;
         gridBCCentralPanel.gridy = 2;
         centralPanel.add(password, gridBCCentralPanel);
@@ -40,6 +43,10 @@ public class CreateAccount extends JFrame {
         gridBCCentralPanel.gridy = 2;
         centralPanel.add(passwordField, gridBCCentralPanel);
 
+        JCheckBox passwordView = new JCheckBox("View Password");
+        gridBCCentralPanel.gridx = 2;
+        gridBCCentralPanel.gridy = 2;
+        centralPanel.add(passwordView, gridBCCentralPanel);
 
         gridBCCentralPanel.gridx = 1;
         gridBCCentralPanel.gridy = 3;
@@ -48,6 +55,10 @@ public class CreateAccount extends JFrame {
         gridBCCentralPanel.gridx = 1;
         gridBCCentralPanel.gridy = 4;
         centralPanel.add(loginButton, gridBCCentralPanel);
+
+        passwordView.addActionListener(e ->  {
+            passwordField.setEchoChar((passwordView.isSelected() ? (char) 0 : '*'));
+        });
 
         createAccountButton.addActionListener(e -> {});
 

@@ -24,7 +24,6 @@ public class StoreManagementPanel extends JPanel {
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        //Bottom panel with the button
         GridBagConstraints gridBCBottom = new GridBagConstraints();
         gridBCBottom.insets = new Insets(5, 5, 25, 5);
         gridBCBottom.gridx = 0;
@@ -37,7 +36,6 @@ public class StoreManagementPanel extends JPanel {
         gridBCBottom.gridx = 2;
         bottomPanel.add(deleteButton, gridBCBottom);
 
-        //Child panel from the Top Panel
         JPanel leftPanel = new JPanel(new GridBagLayout());
         JPanel rightPanel = new JPanel(new GridBagLayout());
 
@@ -63,7 +61,6 @@ public class StoreManagementPanel extends JPanel {
         leftConstraintsPanel.gridy = 1;
         leftPanel.add(assignedEmployeeField, leftConstraintsPanel);
 
-        //Table Right Panel
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();
         rightConstraintsPanel.insets = new Insets(5, 5, 5, 5);
         rightConstraintsPanel.gridx = 0;

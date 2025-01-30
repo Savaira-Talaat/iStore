@@ -8,7 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.*;
 
-public class StoreTable extends JPanel {
+public class    StoreTable extends JPanel {
     private DefaultTableModel tableModel;
     //Manque la class qui s'occupe de l'appel à la bse de donnée et récupère les données
     private JTable table;

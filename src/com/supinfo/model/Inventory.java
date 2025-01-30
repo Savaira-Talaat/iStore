@@ -65,6 +65,23 @@ public class Inventory {
         }
 
     }
+
+    public void updateQuantityItem(int itemId, int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("The value of quantity can't be negative.");
+        }
+        String query = "UPDATE INVENTORY_ITEMS SET quantity = ? WHERE itemId = ?)";
+            try {
+                Connection connection = ConnexionDatabase.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, quantity);
+                preparedStatement.setInt(2, itemId);
+                preparedStatement.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+    }
+
     public List<Item> findAllItems(int inventoryId) {
         String query = """
             SELECT * FROM ITEMS WHERE itemId IN

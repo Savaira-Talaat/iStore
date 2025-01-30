@@ -26,7 +26,6 @@ public class InventoryManagementPanel extends JPanel {
         mainPanel.add(topPanel, BorderLayout.NORTH);
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        //Bottom panel with the button
         GridBagConstraints gridBCBottom = new GridBagConstraints();
         gridBCBottom.insets = new Insets(5, 5, 25, 5);
         gridBCBottom.gridx = 0;
@@ -39,7 +38,6 @@ public class InventoryManagementPanel extends JPanel {
         gridBCBottom.gridx = 2;
         bottomPanel.add(deleteButton, gridBCBottom);
 
-        //Child panel from the Top Panel
         JPanel leftPanel = new JPanel(new GridBagLayout());
         JPanel rightPanel = new JPanel(new GridBagLayout());
 
@@ -74,7 +72,6 @@ public class InventoryManagementPanel extends JPanel {
         leftPanel.add(quantityField, leftConstraintsPanel);
 
 
-        //Table Right Panel
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();
         rightConstraintsPanel.insets = new Insets(5, 5, 5, 5);
         rightConstraintsPanel.gridx = 0;

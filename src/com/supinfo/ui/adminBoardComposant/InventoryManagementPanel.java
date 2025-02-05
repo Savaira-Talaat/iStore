@@ -1,6 +1,8 @@
 package com.supinfo.ui.adminBoardComposant;
 
 
+import com.supinfo.database.InventoryDatabase;
+import com.supinfo.database.ItemDatabase;
 import com.supinfo.ui.tableBoardAdmin.InventoryTable;
 
 import javax.swing.*;
@@ -13,9 +15,11 @@ public class InventoryManagementPanel extends JPanel {
     private JButton deleteButton = new JButton("Delete");
     private InventoryTable inventoryTable;
 
+    private JTextField inventoryIdField = new JTextField(15);
     private JTextField nameField = new JTextField(15);
     private JTextField priceField = new JTextField(15);
     private JTextField quantityField = new JTextField(15);
+    private JTextField storeIdField = new JTextField(15);
 
     public InventoryManagementPanel() {
 
@@ -47,30 +51,45 @@ public class InventoryManagementPanel extends JPanel {
         GridBagConstraints leftConstraintsPanel = new GridBagConstraints();
         leftConstraintsPanel.insets = new Insets(5, 5, 5, 5);
 
-        JLabel name = new JLabel("Name");
+        JLabel inventoryId = new JLabel("InventoryId");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(name, leftConstraintsPanel);
+        leftPanel.add(inventoryId, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 0;
+        leftPanel.add(inventoryIdField, leftConstraintsPanel);
+
+        JLabel name = new JLabel("Name");
+        leftConstraintsPanel.gridx = 0;
+        leftConstraintsPanel.gridy = 1;
+        leftPanel.add(name, leftConstraintsPanel);
+        leftConstraintsPanel.gridx = 1;
+        leftConstraintsPanel.gridy = 1;
         leftPanel.add(nameField, leftConstraintsPanel);
 
         JLabel price = new JLabel("Price");
         leftConstraintsPanel.gridx = 0;
-        leftConstraintsPanel.gridy = 1;
+        leftConstraintsPanel.gridy = 2;
         leftPanel.add(price, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
-        leftConstraintsPanel.gridy = 1;
+        leftConstraintsPanel.gridy = 2;
         leftPanel.add(priceField, leftConstraintsPanel);
 
         JLabel quantity = new JLabel("Quantity");
         leftConstraintsPanel.gridx = 0;
-        leftConstraintsPanel.gridy = 2;
+        leftConstraintsPanel.gridy = 3;
         leftPanel.add(quantity, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
-        leftConstraintsPanel.gridy = 2;
+        leftConstraintsPanel.gridy = 3;
         leftPanel.add(quantityField, leftConstraintsPanel);
 
+        JLabel storeId = new JLabel("storeId");
+        leftConstraintsPanel.gridx = 0;
+        leftConstraintsPanel.gridy = 4;
+        leftPanel.add(storeId, leftConstraintsPanel);
+        leftConstraintsPanel.gridx = 1;
+        leftConstraintsPanel.gridy = 4;
+        leftPanel.add(storeIdField, leftConstraintsPanel);
 
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();
         rightConstraintsPanel.insets = new Insets(5, 5, 5, 5);
@@ -79,7 +98,17 @@ public class InventoryManagementPanel extends JPanel {
         inventoryTable = new InventoryTable();
         rightPanel.add(inventoryTable, rightConstraintsPanel);
 
-        saveButton.addActionListener(e -> {});
+        saveButton.addActionListener(e -> {
+            int inventoryIdToCreate = 0;
+            try {
+                inventoryIdToCreate = Integer.parseInt(inventoryIdField.getText());
+            } catch (NumberFormatException e1) {
+                inventoryIdToCreate = InventoryDatabase.createInventory(Integer.parseInt(storeIdField.getText()));
+            }
+            int itemId = ItemDatabase.createItem(nameField.getText(), Integer.parseInt(quantityField.getText()), Double.parseDouble(priceField.getText()));
+            InventoryDatabase.addItemToInventory(inventoryIdToCreate, itemId);
+            inventoryTable.displayInventory();
+        });
         updateButton.addActionListener(e -> {});
         deleteButton.addActionListener(e -> {});
 

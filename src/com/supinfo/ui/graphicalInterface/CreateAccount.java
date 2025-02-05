@@ -25,17 +25,21 @@ public class CreateAccount extends JFrame {
         GridBagConstraints gridBCCentralPanel = new GridBagConstraints();
 
         JLabel createAccount = new JLabel("Create an account");
-        gridBCCentralPanel.gridx = 1;
+        gridBCCentralPanel.gridx = 0;
         gridBCCentralPanel.gridy = 0;
+        gridBCCentralPanel.gridwidth = 2;
+        gridBCCentralPanel.anchor = GridBagConstraints.CENTER;
         centralPanel.add(createAccount, gridBCCentralPanel);
 
         JLabel email = new JLabel("Email : ");
         JTextField emailField = new JTextField(20);
         gridBCCentralPanel.gridx = 0;
         gridBCCentralPanel.gridy = 1;
+        gridBCCentralPanel.gridwidth = 1;
+        gridBCCentralPanel.anchor = GridBagConstraints.EAST;
         centralPanel.add(email, gridBCCentralPanel);
         gridBCCentralPanel.gridx = 1;
-        gridBCCentralPanel.gridy = 1;
+        gridBCCentralPanel.anchor = GridBagConstraints.WEST;
         centralPanel.add(emailField, gridBCCentralPanel);
 
         JLabel password = new JLabel("Password : ");
@@ -43,18 +47,34 @@ public class CreateAccount extends JFrame {
         passwordField.setEchoChar('*');
         gridBCCentralPanel.gridx = 0;
         gridBCCentralPanel.gridy = 2;
+        gridBCCentralPanel.anchor = GridBagConstraints.EAST;
         centralPanel.add(password, gridBCCentralPanel);
         gridBCCentralPanel.gridx = 1;
-        gridBCCentralPanel.gridy = 2;
+        gridBCCentralPanel.anchor = GridBagConstraints.WEST;
         centralPanel.add(passwordField, gridBCCentralPanel);
 
-
+        JCheckBox passwordView = new JCheckBox("View Password");
         gridBCCentralPanel.gridx = 1;
         gridBCCentralPanel.gridy = 3;
+        centralPanel.add(passwordView, gridBCCentralPanel);
+
+        JLabel username = new JLabel("Username : ");
+        JTextField usernameField = new JTextField(20);
+        gridBCCentralPanel.gridx = 0;
+        gridBCCentralPanel.gridy = 4;
+        gridBCCentralPanel.anchor = GridBagConstraints.EAST;
+        centralPanel.add(username, gridBCCentralPanel);
+        gridBCCentralPanel.gridx = 1;
+        gridBCCentralPanel.anchor = GridBagConstraints.WEST;
+        centralPanel.add(usernameField, gridBCCentralPanel);
+
+        gridBCCentralPanel.gridx = 0;
+        gridBCCentralPanel.gridy = 5;
+        gridBCCentralPanel.gridwidth = 2;
+        gridBCCentralPanel.anchor = GridBagConstraints.CENTER;
         centralPanel.add(createAccountButton, gridBCCentralPanel);
 
-        gridBCCentralPanel.gridx = 1;
-        gridBCCentralPanel.gridy = 4;
+        gridBCCentralPanel.gridy = 6;
         centralPanel.add(loginButton, gridBCCentralPanel);
 
         passwordView.addActionListener(e ->  {

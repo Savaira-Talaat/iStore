@@ -1,6 +1,7 @@
-package userBoardComposant;
+package com.supinfo.ui.userBoardComposant;
 
-import tableBoardUser.UserSetInfoTable;
+import com.supinfo.database.UserSession;
+import com.supinfo.ui.tableBoardUser.UserSetInfoTable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,15 +58,14 @@ public class SetUserInfoPanel extends JPanel {
         rightConstraintsPanel.gridy = 0;
         userSetInfoTable = new UserSetInfoTable();
         rightPanel.add(userSetInfoTable, rightConstraintsPanel);
+        usernameField.setText(UserSession.getUsername());
+
 
         updateButton.addActionListener(e -> {
-            int selectedRow = userSetInfoTable.getSelectedRow();
-            if (selectedRow != -1) {
-                String newUsername = usernameField.getText();
-                if (!newUsername.isEmpty()) {
-                    userSetInfoTable.updateUsername(selectedRow, newUsername);
-                    usernameField.setText("");
-                }
+            String newUsername = usernameField.getText();
+            if (!newUsername.equals(UserSession.getUsername())) {
+                userSetInfoTable.updateUsername(newUsername);
+                usernameField.setText("");
             }
         });
 

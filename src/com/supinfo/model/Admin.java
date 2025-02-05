@@ -4,14 +4,17 @@ import com.supinfo.database.ConnexionDatabase;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Admin extends User {
     public Admin(String username, String password, String email, Role role) {
         super(username, password, email, role);
     }
 
-    private void addToWhitelist(String email) {
+    public static void addToWhitelist(String email) {
         String query = "insert into whitelist (email) values (?)";
         try {
             Connection connection = ConnexionDatabase.getConnection();
@@ -22,6 +25,24 @@ public class Admin extends User {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static List<String> findWhitelist() {
+        String query = """
+            SELECT email FROM WHITELIST
+        """;
+        try {
+            Connection connection = ConnexionDatabase.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<String> emails = new ArrayList<>();
+            while (resultSet.next()) {
+                emails.add(resultSet.getString("email"));
+            }
+            return emails;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void deleteFromWhitelist(int whitelistId) {
@@ -35,45 +56,8 @@ public class Admin extends User {
         }
     }
 
-    private void createStore(String storeName) {
-        String query = "insert into stores (storeName) value (?)";
 
-        try {
-            Connection connection = ConnexionDatabase.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, storeName);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    private void deleteStore(int storeId) {
-        String query = "delete from stores where storeId = ?";
-        try {
-            Connection connection = ConnexionDatabase.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, storeId);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-    private void assignEmployeeToStore(int storeId, int userId){
-        String query = "INSERT INTO STORE_EMPLOYEES (storeId, userId) VALUES (?,?)";
-        try {
-            Connection connection = ConnexionDatabase.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setInt(1, storeId);
-            preparedStatement.setInt(2, userId);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    private void deleteEmployeeFromStore(int userId) {
+    public static void deleteEmployeeFromStore(int userId) {
         String query = "DELETE FROM STORE_EMPLOYEES WHERE userId = ?";
 
         try {
@@ -84,7 +68,6 @@ public class Admin extends User {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
 
     }
 }

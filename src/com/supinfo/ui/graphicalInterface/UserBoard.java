@@ -1,11 +1,14 @@
-package graphicalInterface;
+package com.supinfo.ui.graphicalInterface;
 
 
-import userBoardComposant.UserInfoPanel;
-import userBoardComposant.InventoryManagPanel;
-import userBoardComposant.SetUserInfoPanel;
+import com.supinfo.ui.userBoardComposant.InventoryManagPanel;
+import com.supinfo.ui.userBoardComposant.SetUserInfoPanel;
+import com.supinfo.ui.userBoardComposant.UserInfoPanel;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserBoard extends JFrame {
 
@@ -21,10 +24,32 @@ public class UserBoard extends JFrame {
         userPane.addTab("Set User Info", new SetUserInfoPanel());
         userPane.addTab("Inventory", new InventoryManagPanel());
 
+        JPanel bottomPanel = getBottomPanel();
 
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(userPane, BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        this.setContentPane(userPane);
+        this.setContentPane(mainPanel);
         this.setVisible(true);
+    }
+
+    private JPanel getBottomPanel() {
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
+                if (confirm == JOptionPane.YES_OPTION) {
+                    dispose();
+                    new Login();
+                }
+            }
+        });
+
+        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        bottomPanel.add(logoutButton);
+        return bottomPanel;
     }
 
 }

@@ -1,6 +1,6 @@
 package com.supinfo.ui.tableBoardAdmin;
 
-import com.supinfo.database.StoreDatabase;
+import com.supinfo.model.Admin;
 import com.supinfo.model.Store;
 
 import javax.swing.*;
@@ -9,14 +9,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-public class    StoreTable extends JPanel {
+public class WhitelistTable extends JPanel {
     private DefaultTableModel tableModel;
     //Manque la class qui s'occupe de l'appel à la bse de donnée et récupère les données
     private JTable table;
     private int id;
     private JScrollPane scrollPane;
 
-    public StoreTable(){
+    public WhitelistTable(){
         //appel de la classe qui récupére la data
         //
 
@@ -39,18 +39,17 @@ public class    StoreTable extends JPanel {
         scrollPane = new JScrollPane(table);
 
         //Table colonne
-        tableModel.addColumn("Store ID");
-        tableModel.addColumn("Name");
+        tableModel.addColumn("email");
 
-        displayStore();
+        displayWhitelist();
 
     }
 
-    public void displayStore() {
+    public void displayWhitelist() {
         tableModel.setRowCount(0);
-        List<Store> allStore = StoreDatabase.findAllStore();
-        for(Store store: allStore) {
-            tableModel.addRow(new Object[]{store.getStoreId(), store.getStoreName()});
+        List<String> emails = Admin.findWhitelist();
+        for(String email: emails) {
+            tableModel.addRow(new Object[]{email});
         }
         add(scrollPane);
     }

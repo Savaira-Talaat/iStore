@@ -1,6 +1,8 @@
 package com.supinfo.ui.adminBoardComposant;
 
 
+import com.supinfo.database.StoreDatabase;
+import com.supinfo.model.Admin;
 import com.supinfo.ui.tableBoardAdmin.EmployeeTable;
 
 import javax.swing.*;
@@ -8,13 +10,12 @@ import java.awt.*;
 
 public class EmployeeManagementPanel extends JPanel {
 
-    private JButton creatButton = new JButton("Create");
     private JButton updateButton = new JButton("Update");
     private JButton deleteButton = new JButton("Delete");
     private EmployeeTable employeeTable;
 
-    private JTextField employeeEmailField = new JTextField(15);
-    private JTextField employeeRoleField = new JTextField(15);
+    private JTextField employeeIdField = new JTextField(15);
+    private JTextField storeIdField = new JTextField(15);
 
     public EmployeeManagementPanel(){
 
@@ -27,13 +28,11 @@ public class EmployeeManagementPanel extends JPanel {
 
         GridBagConstraints gridBCBottom = new GridBagConstraints();
         gridBCBottom.insets = new Insets(5,5,25,5);
-        gridBCBottom.gridx = 1;
-        bottomPanel.add(creatButton, gridBCBottom);
 
-        gridBCBottom.gridx = 2;
+        gridBCBottom.gridx = 1;
         bottomPanel.add(updateButton, gridBCBottom);
 
-        gridBCBottom.gridx = 3;
+        gridBCBottom.gridx = 2;
         bottomPanel.add(deleteButton, gridBCBottom);
 
         JPanel leftPanel = new JPanel(new GridBagLayout());
@@ -45,21 +44,21 @@ public class EmployeeManagementPanel extends JPanel {
         GridBagConstraints leftConstraintsPanel = new GridBagConstraints();
         leftConstraintsPanel.insets = new Insets(5, 5, 5, 5);
 
-        JLabel email = new JLabel("Email");
+        JLabel id = new JLabel("id");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(email, leftConstraintsPanel);
+        leftPanel.add(id, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(employeeEmailField, leftConstraintsPanel);
+        leftPanel.add(employeeIdField, leftConstraintsPanel);
 
-        JLabel role = new JLabel("Role");
+        JLabel storeId = new JLabel("storeId");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 3;
-        leftPanel.add(role, leftConstraintsPanel);
+        leftPanel.add(storeId, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 3;
-        leftPanel.add(employeeRoleField, leftConstraintsPanel);
+        leftPanel.add(storeIdField, leftConstraintsPanel);
 
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();
         rightConstraintsPanel.insets = new Insets(5, 5, 5, 5);
@@ -68,15 +67,19 @@ public class EmployeeManagementPanel extends JPanel {
         employeeTable = new EmployeeTable();
         rightPanel.add(employeeTable, rightConstraintsPanel);
 
-        creatButton.addActionListener(e -> {
-
-        });
-
         updateButton.addActionListener(e -> {
+            StoreDatabase.addEmployees(
+                Integer.parseInt(employeeIdField.getText()),
+                Integer.parseInt(storeIdField.getText())
+            );
+            EmployeeTable.searchEmployee();
         });
 
 
         deleteButton.addActionListener(e -> {
+            Admin.deleteEmployeeFromStore(
+                    Integer.parseInt(employeeIdField.getText())
+            );
         });
 
         setLayout(new BorderLayout());

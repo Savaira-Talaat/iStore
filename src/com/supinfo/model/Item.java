@@ -5,6 +5,7 @@ public class Item {
     private String itemName;
     private int quantity;
     private double price;
+    private int inventoryId;
 
     public Item(int itemId, String itemName, int quantity, double price) {
         this.itemId = itemId;
@@ -12,6 +13,15 @@ public class Item {
         this.quantity = quantity;
         this.price = price;
     }
+
+    public Item(int itemId, String itemName, int quantity, double price, int inventoryId) {
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.quantity = quantity;
+        this.price = price;
+        this.inventoryId = inventoryId;
+    }
+
 
     public int getItemId() {
         return itemId;
@@ -29,4 +39,7 @@ public class Item {
         return price;
     }
 
+    public int getInventoryId() {
+        return inventoryId;
+    }
 }

@@ -9,8 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Signin {
-    public boolean isWhitelisted(String email){
-        String query = "SELECT COUNT(*) FROM WHITELIST WHERE email = ?";
+    public static boolean isWhitelisted(String email){
+        String query = "SELECT * FROM WHITELIST WHERE email = ?";
         try {
             Connection connection = ConnexionDatabase.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -22,6 +22,9 @@ public class Signin {
         }
     }
     public static void signIn(User user){
+        if (!isWhitelisted(user.getEmail())) {
+            throw new RuntimeException("email is not whitelisted");
+        }
         String query = "INSERT INTO USERS (username, password, email, role) VALUES (?, ?, ?, ?)";
         try {
             Connection connection = ConnexionDatabase.getConnection();

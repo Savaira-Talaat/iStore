@@ -24,7 +24,7 @@ public class Login extends JFrame {
         gridBCCentralPanel.gridy = 0;
         centralPanel.add(createAccount, gridBCCentralPanel);
 
-        JLabel login = new JLabel("Login : ");
+        JLabel login = new JLabel("Username : ");
         JTextField loginField = new JTextField(20);
         gridBCCentralPanel.gridx = 0;
         gridBCCentralPanel.gridy = 1;
@@ -33,7 +33,7 @@ public class Login extends JFrame {
         gridBCCentralPanel.gridy = 1;
         centralPanel.add(loginField, gridBCCentralPanel);
 
-        JLabel password = new JLabel("Mot de passe : ");
+        JLabel password = new JLabel("Password : ");
         JPasswordField passwordField = new JPasswordField(20);
         passwordField.setEchoChar('*');
         gridBCCentralPanel.gridx = 0;
@@ -61,32 +61,31 @@ public class Login extends JFrame {
             passwordField.setEchoChar((passwordView.isSelected() ? (char) 0 : '*'));
         });
 
-        loginButton.addActionListener(e -> {
-            Role authenticate = com.supinfo.database.Login.authenticate(
-                    loginField.getText(),
-                    passwordField.getText()
-            );
-            if(authenticate!= null) {
-                if (authenticate.equals(Role.EMPLOYEE)) {
-                    new UserBoard();
-                } else if (authenticate.equals(Role.ADMIN)) {
-                    new AdminBoard();
-                }
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Authentication failed, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-                System.out.println(authenticate);
-
-        });
+        loginButton.addActionListener(e -> performLogin(loginField.getText(), new String(passwordField.getPassword())));
 
         createAccountButton.addActionListener(e -> {
             new CreateAccount();
             this.dispose();
         });
 
+        this.getRootPane().setDefaultButton(loginButton);
+
         this.setContentPane(centralPanel);
         this.setVisible(true);
+    }
 
+    private void performLogin(String username, String password) {
+        Role authenticate = com.supinfo.database.Login.authenticate(username, password);
+        if (authenticate != null) {
+            if (authenticate.equals(Role.EMPLOYEE)) {
+                new UserBoard();
+            } else if (authenticate.equals(Role.ADMIN)) {
+                new AdminBoard();
+            }
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Authentication failed, please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        System.out.println(authenticate);
     }
 }

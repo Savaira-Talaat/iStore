@@ -1,15 +1,17 @@
 package com.supinfo.ui.tableBoardUser;
 
-import connexionPackage.ConnexionDatabase;
+
+import com.supinfo.database.InventoryDatabase;
+import com.supinfo.database.StoreDatabase;
+import com.supinfo.database.UserSession;
+import com.supinfo.model.Item;
+import com.supinfo.model.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
 public class UserInventoryTable extends JPanel {
     private DefaultTableModel tableModel;
@@ -41,15 +43,18 @@ public class UserInventoryTable extends JPanel {
         tableModel.addColumn("Item Name");
         tableModel.addColumn("Price");
         tableModel.addColumn("Quantity");
-
-        tableModel.addRow(new Object[]{"Auchan", "1", "Bouteille", "23", "300"});
-        tableModel.addRow(new Object[]{"Mono", "2", "Ketchup", "2", "30"});
-        tableModel.addRow(new Object[]{"Carrefour", "3", "Salade", "0.45", "12"});
-        tableModel.addRow(new Object[]{"Mont", "4", "Burger", "345", "45"});
-
+        items();
 
         add(scrollPane);
 
+    }
+
+    public void items() {
+        tableModel.setRowCount(0);
+        List<Item> allItems = InventoryDatabase.findAllItems(UserSession.getUserId());
+        for(Item item: allItems) {
+            tableModel.addRow(new Object[]{"Lego", item.getItemId(),item.getItemName(), item.getPrice(), item.getQuantity()});
+        }
     }
 
 }

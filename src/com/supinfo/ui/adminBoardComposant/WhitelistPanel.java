@@ -1,23 +1,17 @@
 package com.supinfo.ui.adminBoardComposant;
 
-
-import com.supinfo.database.StoreDatabase;
-import com.supinfo.ui.tableBoardAdmin.StoreTable;
+import com.supinfo.model.Admin;
+import com.supinfo.ui.tableBoardAdmin.WhitelistTable;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class StoreManagementPanel extends JPanel {
-
+public class WhitelistPanel extends JPanel {
     private JButton createButton = new JButton("Create");
-    private JButton assignedButton = new JButton("Assigned");
     private JButton deleteButton = new JButton("Delete");
-    private StoreTable storeTable;
+    private JTextField emailField = new JTextField(15);
 
-    private JTextField storeNameField = new JTextField(15);
-
-    public StoreManagementPanel() {
-
+    public WhitelistPanel() {
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel bottomPanel = new JPanel(new GridBagLayout());
         JPanel topPanel = new JPanel(new BorderLayout());
@@ -32,9 +26,6 @@ public class StoreManagementPanel extends JPanel {
         bottomPanel.add(createButton, gridBCBottom);
 
         gridBCBottom.gridx = 1;
-        bottomPanel.add(assignedButton, gridBCBottom);
-
-        gridBCBottom.gridx = 2;
         bottomPanel.add(deleteButton, gridBCBottom);
 
         JPanel leftPanel = new JPanel(new GridBagLayout());
@@ -46,32 +37,31 @@ public class StoreManagementPanel extends JPanel {
         GridBagConstraints leftConstraintsPanel = new GridBagConstraints();
         leftConstraintsPanel.insets = new Insets(5, 5, 5, 5);
 
-        JLabel storeName = new JLabel("Store Name");
+        JLabel email = new JLabel("Email");
         leftConstraintsPanel.gridx = 0;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(storeName, leftConstraintsPanel);
+        leftPanel.add(email, leftConstraintsPanel);
         leftConstraintsPanel.gridx = 1;
         leftConstraintsPanel.gridy = 0;
-        leftPanel.add(storeNameField, leftConstraintsPanel);
+        leftPanel.add(emailField, leftConstraintsPanel);
 
         GridBagConstraints rightConstraintsPanel = new GridBagConstraints();
         rightConstraintsPanel.insets = new Insets(5, 5, 5, 5);
         rightConstraintsPanel.gridx = 0;
         rightConstraintsPanel.gridy = 0;
-        storeTable = new StoreTable();
-        rightPanel.add(storeTable, rightConstraintsPanel);
+        WhitelistTable whitelistTable = new WhitelistTable();
+        rightPanel.add(whitelistTable, rightConstraintsPanel);
 
         createButton.addActionListener(e -> {
-            StoreDatabase.createStore(
-                    storeNameField.getText()
+            Admin.addToWhitelist(
+                    emailField.getText()
             );
-            storeTable.displayStore();
+            whitelistTable.displayWhitelist();
         });
-        assignedButton.addActionListener(e -> {});
+
         deleteButton.addActionListener(e -> {});
 
         setLayout(new BorderLayout());
         add(mainPanel, BorderLayout.CENTER);
-
     }
 }

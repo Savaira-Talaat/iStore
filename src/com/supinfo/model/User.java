@@ -6,9 +6,22 @@ public class User {
     private String password;
     private String email;
     private Role role;
+    private int storeId;
+
     public User(String username, String password, String email, Role role) {
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+    public User(int id, String email, Role role, int storeId) {
+        this.userId = id;
+        this.email = email;
+        this.role = role;
+        this.storeId = storeId;
+    }
+    public User(int id, String email, Role role) {
+        this.userId = id;
         this.email = email;
         this.role = role;
     }
@@ -32,6 +45,10 @@ public class User {
     }
     public String getRole() {
         return role.name();
+    }
+
+    public int getStoreId() {
+        return storeId;
     }
 
     public boolean createAccount(String username, String password, String email) {

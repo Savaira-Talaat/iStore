@@ -1,6 +1,7 @@
 package com.supinfo.ui.tableBoardUser;
 
-import connexionPackage.ConnexionDatabase;
+import com.supinfo.database.StoreDatabase;
+import com.supinfo.model.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 public class UserEmployeeTable extends JPanel {
     private DefaultTableModel tableModel;
@@ -41,11 +43,16 @@ public class UserEmployeeTable extends JPanel {
         tableModel.addColumn("Username");
         tableModel.addColumn("Role");
 
-        tableModel.addRow(new Object[]{"titi@gmail.com", "Titi", "EMPLOYEE"});
-        tableModel.addRow(new Object[]{"Savaira@Kahoot.fr", "Savaira", "EMPLOYEE"});
-        tableModel.addRow(new Object[]{"Papi@quartsiecle.com", "Mathias", "EMPLOYEE"});
-        tableModel.addRow(new Object[]{"helloworld@gmail.com", "World", "EMPLOYEE"});
+        searchEmployee();
 
         add(scrollPane);
+    }
+
+    public void searchEmployee() {
+        tableModel.setRowCount(0);
+        List<User> allEmployees = StoreDatabase.findAllEmployees();
+        for(User user: allEmployees) {
+            tableModel.addRow(new Object[]{user.getUserId(), user.getEmail(),user.getRole(), user.getStoreId()});
+        }
     }
 }

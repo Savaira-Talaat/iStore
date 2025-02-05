@@ -1,20 +1,19 @@
 package com.supinfo.ui.tableBoardAdmin;
 
-import connexionPackage.ConnexionDatabase;
+import com.supinfo.database.StoreDatabase;
+import com.supinfo.model.User;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
 public class EmployeeTable extends JPanel {
-    private DefaultTableModel tableModel;
-    private JTable table;
+    private static DefaultTableModel tableModel;
+    private static JTable table;
     private int id;
+
 
     public EmployeeTable(){
         //Table Modèle
@@ -36,16 +35,20 @@ public class EmployeeTable extends JPanel {
         JScrollPane scrollPane = new JScrollPane(table);
 
         //Table colonne
+        tableModel.addColumn("Id");
         tableModel.addColumn("Email");
         tableModel.addColumn("Role");
-
-        tableModel.addRow(new Object[]{"titi@gmail.com","EMPLOYEE"});
-        tableModel.addRow(new Object[]{"Savaira@Kahoot.fr", "EMPLOYEE"});
-        tableModel.addRow(new Object[]{"Papi@quartsiecle.com", "EMPLOYEE"});
-        tableModel.addRow(new Object[]{"helloworld@gmail.com", "EMPLOYEE"});
-
+        tableModel.addColumn("storeId");
         add(scrollPane);
+        searchEmployee();
+    }
 
+    public static void searchEmployee() {
+        tableModel.setRowCount(0);
+        List<User> allEmployees = StoreDatabase.findAllEmployees();
+        for(User user: allEmployees) {
+            tableModel.addRow(new Object[]{user.getUserId(), user.getEmail(),user.getRole(), user.getStoreId()});
+        }
     }
 
 }
